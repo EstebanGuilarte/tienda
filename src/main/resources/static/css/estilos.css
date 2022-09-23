@@ -1,0 +1,45 @@
+header{
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+article header{ /*Headers que estén dentro de un article*/
+    background-color: blue;
+    color: white;
+}
+
+h2{
+    text-align: center;
+    background-color: green;
+    color: white;
+}
+
+#titulo {
+    font-size: 44px;
+}
+
+.producto{
+    background-color: bisque;
+}
+
+nav a {
+    background-color: blue;
+    color: white;
+}
+
+nav a:hover{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    animation-delay: 1s;
+}
+
+article:odd{
+    background-color: yellow;
+    color: white;
+}
+article:even{
+    background-color: yellowgreen;
+    color: white;
+}
