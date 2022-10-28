@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
+        <header th:replace="layout/plantilla :: header"/>
         <h2>Datos de clientes</h2>
         <a th:href="@{/cliente/nuevo}">Nuevo cliente</a>
 
@@ -37,6 +38,6 @@
         <div th:if="${clientes == null or clientes.empty}">
             <h3>No tenemos clientes que mostrar</h3>
         </div>
-
+        <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>
