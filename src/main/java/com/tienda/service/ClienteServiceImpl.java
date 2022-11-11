@@ -11,25 +11,32 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service //Para considerar la clase servicio
 public class ClienteServiceImpl implements ClienteService {
-    
+
     @Autowired //La anotación crea el objeto en caso de no estar creado, si está creado lo usa
     private ClienteDao clienteDao;
-    
+
     @Autowired
     private CreditoDao creditoDao;
-    
+
     @Override //Anotación para hacer cambios
     @Transactional(readOnly = true) //Anotación para consultas
-
     //Aquí abajo están los métodos para hacer un CRUD
     public List<Cliente> getClientes() {
         return (List<Cliente>) clienteDao.findAll();
     }
-    
+
+    @Override //Anotación para hacer cambios
+    @Transactional(readOnly = true) //Anotación para consultas
+    public List<Cliente> getClientesPorApellidos(String apellidos) {
+        return (List<Cliente>) clienteDao.findByApellidos(apellidos);
+    }
+
+    @Override //Anotación para hacer cambios
+    @Transactional(readOnly = true) //Anotación para consultas
     public Cliente getCliente(Cliente cliente) {
         return clienteDao.findById(cliente.getIdCliente()).orElse(null);
     }
-    
+
     @Override
     @Transactional
     public void save(Cliente cliente) { //Este método sirve para guardar y para actualizar ***Si el idCliente es 0, lo inserta, si tiene algún valor hace update de ése registro
@@ -38,7 +45,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setCredito(credito);
         clienteDao.save(cliente);
     }
-    
+
     @Override
     @Transactional
     public void delete(Cliente cliente) {
