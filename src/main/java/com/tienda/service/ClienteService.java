@@ -10,6 +10,8 @@ public interface ClienteService {
 
     public List<Cliente> getClientesPorApellidos(String apellidos);
 
+    public List<Cliente> findByApellidos(Cliente cliente);
+
     public Cliente getCliente(Cliente cliente);
 
     public void save(Cliente cliente);

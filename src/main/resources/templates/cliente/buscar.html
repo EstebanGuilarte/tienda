@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8"/>
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <div>
+            <form th:action="@{/cliente/busqueda}"
+                  method="post"
+                  th:object="${cliente}">
+                <input type="hidden"
+                       name="idCliente"
+                       th:field="*{idCliente}"/>
+                <fieldset>
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" 
+                           name="apellidos" 
+                           required="true"
+                           placeholder="Apellidos"
+                           th:field="*{apellidos}"/>
+                    <hr/>
+                    <input type="submit" name="buscar" value="buscar"/>
+                </fieldset>
+            </form>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

@@ -33,6 +33,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override //Anotación para hacer cambios
     @Transactional(readOnly = true) //Anotación para consultas
+    public List<Cliente> findByApellidos(Cliente cliente) {
+        return clienteDao.findByApellidos(cliente.getApellidos());
+    }
+
+    @Override //Anotación para hacer cambios
+    @Transactional(readOnly = true) //Anotación para consultas
     public Cliente getCliente(Cliente cliente) {
         return clienteDao.findById(cliente.getIdCliente()).orElse(null);
     }

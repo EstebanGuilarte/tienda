@@ -13,11 +13,11 @@ public class ClienteController {
 
     @Autowired //Para crear el objeto o para que se use si ya existe **No hace más de un objeto
     private ClienteService clienteService;
-    
+
     @GetMapping("/cliente/listado")
     public String inicio(Model model) {
-        //var clientes = clienteService.getClientes();
-        var clientes = clienteService.getClientesPorApellidos("Mena Loria");
+        var clientes = clienteService.getClientes();
+        //var clientes = clienteService.getClientesPorApellidos("Mena Loria"); ---> findByApellidos seleccionando un apellido desde el código
         model.addAttribute("clientes", clientes);
         return "/cliente/listado";
     }
@@ -32,8 +32,8 @@ public class ClienteController {
         clienteService.save(cliente);
         return "redirect:/cliente/listado";
     }
-    
-     @GetMapping("/cliente/elimina/{idCliente}")
+
+    @GetMapping("/cliente/elimina/{idCliente}")
     public String clienteElimina(Cliente cliente) {
         clienteService.delete(cliente);
         return "redirect:/cliente/listado";
@@ -44,5 +44,17 @@ public class ClienteController {
         cliente = clienteService.getCliente(cliente);
         model.addAttribute("cliente", cliente);
         return "/cliente/modificar";
+    }
+
+    @GetMapping("/cliente/buscar")
+    public String clienteBuscar(Cliente cliente) {
+        return "/cliente/buscar";
+    }
+
+    @PostMapping("/cliente/busqueda")
+    public String clienteBusqueda(Cliente cliente,Model model) {
+        var clientes = clienteService.findByApellidos(cliente);
+        model.addAttribute("clientes", clientes);
+        return "/cliente/busqueda";
     }
 }
