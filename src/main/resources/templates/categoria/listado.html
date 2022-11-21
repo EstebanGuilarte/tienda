@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
         <meta charset="UTF-8"/>
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
-            <h2>Datos de categorias</h2>
-            <a th:href="@{/categoria/nuevo}">Nuevo categoria</a>
+            <h2>[[#{categoria.titulo}]]</h2>
+            <a th:href="@{/categoria/nuevo}">[[#{categoria.nuevo}]]</a>
             <div th:if="${categorias != null and !categorias.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Descripcion</th>
-                            <th>Activa</th>
+                            <th>[[#{categoria.descripcion}]]</th>
+                            <th>[[#{categoria.activo}]]</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="categoria : ${categorias}">
                             <td>[[${categoria.descripcion}]]</td>
                             <td><input type="checkbox" name="activa" th:checked="${categoria.activo}" disabled="true"></td>
-                            <td><a th:href="@{/categoria/elimina/} + ${categoria.idCategoria}">Elimina</a></td>
-                            <td><a th:href="@{/categoria/actualiza/} + ${categoria.idCategoria}">Actualiza</a></td>
+                            <td><a th:href="@{/categoria/elimina/} + ${categoria.idCategoria}">[[#{accion.eliminar}]]</a></td>
+                            <td><a th:href="@{/categoria/actualiza/} + ${categoria.idCategoria}">[[#{accion.actualizar}]]</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div th:if="${categorias == null or categorias.empty}">
-                <h3>No tenemos categorias que mostrar</h3>
+                <h3>[[#{categoria.no_mostrar}]]</h3>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>
