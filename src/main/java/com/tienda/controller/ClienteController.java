@@ -17,8 +17,13 @@ public class ClienteController {
     @GetMapping("/cliente/listado")
     public String inicio(Model model) {
         var clientes = clienteService.getClientes();
-        //var clientes = clienteService.getClientesPorApellidos("Mena Loria"); ---> findByApellidos seleccionando un apellido desde el código
         model.addAttribute("clientes", clientes);
+        var limiteTotal = 0;
+        for (var c : clientes) {
+            limiteTotal += c.credito.limite;
+        }
+        model.addAttribute("limiteTotal", limiteTotal);
+        model.addAttribute("totalClientes", clientes.size());
         return "/cliente/listado";
     }
 
@@ -33,13 +38,13 @@ public class ClienteController {
         return "redirect:/cliente/listado";
     }
 
-    @GetMapping("/cliente/elimina/{idCliente}")
+    @GetMapping("/cliente/eliminar/{idCliente}")
     public String clienteElimina(Cliente cliente) {
         clienteService.delete(cliente);
         return "redirect:/cliente/listado";
     }
 
-    @GetMapping("/cliente/actualiza/{idCliente}")
+    @GetMapping("/cliente/modificar/{idCliente}")
     public String clienteActualiza(Cliente cliente, Model model) {
         cliente = clienteService.getCliente(cliente);
         model.addAttribute("cliente", cliente);
@@ -52,7 +57,7 @@ public class ClienteController {
     }
 
     @PostMapping("/cliente/busqueda")
-    public String clienteBusqueda(Cliente cliente,Model model) {
+    public String clienteBusqueda(Cliente cliente, Model model) {
         var clientes = clienteService.findByApellidos(cliente);
         model.addAttribute("clientes", clientes);
         return "/cliente/busqueda";

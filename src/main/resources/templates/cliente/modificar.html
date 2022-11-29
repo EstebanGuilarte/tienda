@@ -8,59 +8,7 @@
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
-        <div class="contenido">
-            <h2>[[#{cliente.datos}]]</h2>
-            <a th:href="@{/cliente/listado}">[[#{accion.regresar}]]</a>
-            <hr/>
-            <form th:action="@{/cliente/guardar}"
-                  method="post"
-                  th:object="${cliente}">
-
-                <input type="hidden"
-                       name="idCliente"
-                       th:field="*{idCliente}"/>
-
-                <fieldset>
-                    <label for="nombre">[[#{cliente.nombre}]]</label>
-                    <input type="text" 
-                           name="nombre" 
-                           required="true"
-                           placeholder="Nombre"
-                           th:field="*{nombre}"/>
-                </fieldset>
-                <fieldset>
-                    <label for="apellidos">[[#{cliente.apellidos}]]</label>
-                    <input type="text" 
-                           name="apellidos" 
-                           required="true"
-                           placeholder="Apellidos"
-                           th:field="*{apellidos}"/>
-                </fieldset>
-                <fieldset>
-                    <label for="correo">[[#{cliente.correo}]]</label>
-                    <input type="email" 
-                           name="correo" 
-                           placeholder="correo@xxx.com"
-                           th:field="*{correo}"/>
-                </fieldset>
-                <fieldset>
-                    <label for="telefono">[[#{cliente.telefono}]]</label>
-                    <input type="tel" 
-                           name="telefono" 
-                           placeholder="####-####"
-                           size="9"
-                           th:field="*{telefono}"/>
-                </fieldset>
-                <fieldset>
-                    <label for="credito">[[#{cliente.limite}]]</label>
-                    <input type="number" 
-                           name="credito" 
-                           th:field="*{credito.limite}"/>
-                </fieldset>
-                <hr/>
-                <button type="submit" th:text="#{accion.guardar}"/>
-            </form>
-        </div>
+        <section th:replace="cliente/fragmentosCliente :: editarCliente"/> 
         <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>
